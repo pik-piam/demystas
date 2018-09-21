@@ -10,4 +10,4 @@ This package aims to offer useful functions for data analysts which might help i
 
 Atreya Shankar
 
-Potsdam Institute for Climate Impact Research (PIK)
+Research Domain 3, Potsdam Institute for Climate Impact Research (PIK)
