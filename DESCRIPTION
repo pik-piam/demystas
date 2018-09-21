@@ -1,0 +1,18 @@
+Package: demystas
+Title: Demystifying Automation for Simple Tasks
+Version: 1.0.0
+Date: 2018-09-21
+Authors@R: person("Atreya", "Shankar", email = "shankar@pik-potsdam.de",
+  role = c("aut", "cre"))
+Description: What the package does (one paragraph).
+Depends: R (>= 3.3.2)
+License: MIT + file LICENSE
+Encoding: UTF-8
+LazyData: true
+RoxygenNote: 6.1.0
+Imports: doParallel,
+    snow,
+    foreach,
+    doSNOW,
+    utils
+ValidationKey: 1779500
