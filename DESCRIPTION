@@ -1,6 +1,6 @@
 Package: demystas
 Title: Demystifying Automation on Simple Tasks
-Version: 1.1.0
+Version: 1.1.1
 Date: 2018-09-22
 Authors@R: person("Atreya", "Shankar", email = "shankar@pik-potsdam.de",
   role = c("aut", "cre"))
@@ -15,4 +15,4 @@ Imports: doParallel,
     foreach,
     doSNOW,
     utils
-ValidationKey: 1957560
+ValidationKey: 1975356

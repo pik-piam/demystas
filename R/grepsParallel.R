@@ -57,15 +57,15 @@ grepsParallel <- function(x, y, noCores, sepx = "\\.", sepy = "\\.", limitChar =
     stop("more noCores supplied than available cores")
   }
 
-  if(!is.character(sepx) & !is.na(sepx)){
+  if(!is.character(sepx) & !is.null(sepx)){
     stop("sepx must be NULL or a regex-style expression")
-  } else if(is.na(sepx)){
+  } else if(is.null(sepx)){
     xList <- as.list(x)
   } else xList <- strsplit(x, sepx)
 
-  if(!is.character(sepy) & !is.na(sepy)){
+  if(!is.character(sepy) & !is.null(sepy)){
     stop("sepy must be NULL or a regex-style expression")
-  } else if(is.na(sepy)){
+  } else if(is.null(sepy)){
     yList <- as.list(y)
   } else yList <- strsplit(y, sepy)
 

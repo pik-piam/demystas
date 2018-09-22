@@ -3,6 +3,7 @@
 export(greps)
 export(grepsAbb)
 export(grepsParallel)
+export(vectorEnum)
 import(doParallel)
 importFrom(doSNOW,registerDoSNOW)
 importFrom(foreach,"%:%")
