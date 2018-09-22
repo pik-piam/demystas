@@ -18,6 +18,4 @@ Voila, the package is yours! Feel free to test it.
 
 ## Author
 
-Atreya Shankar
-
-Potsdam Institute for Climate Impact Research (PIK)
+Atreya Shankar, Potsdam Institute for Climate Impact Research (PIK)
