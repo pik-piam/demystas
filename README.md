@@ -11,6 +11,8 @@ This package aims to offer useful functions for data analysts which might help i
 To install this package, simply open up a local R console and execute the following:
 
 ```r
+if(!require(devtools)) install.packages("devtools")
+
 devtools::install_github("AtreyaSh/demystas")
 ```
 
