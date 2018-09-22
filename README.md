@@ -16,6 +16,10 @@ devtools::install_github("AtreyaSh/demystas")
 
 Voila, the package is yours! Feel free to test it.
 
+## Wikis
+
+Comprehensive wikis for our functions are under development... :snail:
+
 ## Author
 
 Atreya Shankar, Potsdam Institute for Climate Impact Research (PIK)
