@@ -6,8 +6,18 @@ As data analysts, there are a myriad of daily tasks which seem simple, but yet h
 
 This package aims to offer useful functions for data analysts which might help in making these "on-the-fly" tasks lighter and more automated.
 
+## Installation
+
+To install this package, simply open up a local R console and execute the following:
+
+```r
+devtools::install_github("AtreyaSh/demystas")
+```
+
+Voila, the package is yours! Feel free to test it.
+
 ## Author
 
 Atreya Shankar
 
-Research Domain 3, Potsdam Institute for Climate Impact Research (PIK)
+Potsdam Institute for Climate Impact Research (PIK)
