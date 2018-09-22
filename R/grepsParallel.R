@@ -3,6 +3,7 @@
 #' Performs a two-way grep-style analysis on two character vectors using parallel computation. Calculates pairwise matching scores based on a rigid customized routine and returns matching strings ranked
 #' from best to worst. The user is able to influence the algorithm by tweaking matching parameters.
 #'
+#' @name grepsParallel
 #' @param x a character vector containing elements to be considered in pairwise grep-analysis. Words are separated by `sepx`.
 #' @param y a character vector containing elements to be considered in pairwise grep-analysis. Words are separated by `sepy`.
 #' @param noCores is a numerical value specifying the number of cores to be used for parallel computation.

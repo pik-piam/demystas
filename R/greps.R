@@ -3,6 +3,7 @@
 #' Sequentially performs a two-way grep-style analysis on two character vectors. Calculates pairwise matching scores based on a rigid customized routine and returns matching strings ranked
 #' from best to worst. The user is able to influence the algorithm by tweaking matching parameters.
 #'
+#' @name greps
 #' @param x a character vector containing elements to be considered in pairwise grep-analysis. Words are separated by `sepx`.
 #' @param y a character vector containing elements to be considered in pairwise grep-analysis. Words are separated by `sepy`.
 #' @param sepx a regex-style expression which indicates how words are separated in `x`. If `x` is already a final vector and does not need to be segmented, input `sepx = NULL`. Defaults to "\\\\."
