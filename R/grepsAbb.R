@@ -47,13 +47,7 @@ grepsAbb <- function(x, y){
 
   for(i in 1:length(xList)){
     for(k in 1:length(yList)){
-      if(x[i] == y[k] | (all(xList[[i]] %in% yList[[k]]) & all(yList[[k]] %in% xList[[i]]))) {
-
-        result[i,-1] <- NA
-        result[i,min(which(is.na(result[i,])))] <- y[k]
-        break
-
-      } else if (!y[k] %in% result[i,-1]){
+        if(!y[k] %in% result[i,-1]){
         checkIndex <- lapply(xList[[i]], function(x) return(grep(paste0("\\Q", x, "\\E"), strsplit(yList[[k]], "")[[1]], ignore.case = TRUE)))
         check <- lapply(checkIndex, length)
 

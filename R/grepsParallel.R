@@ -36,7 +36,7 @@
 #'
 #' x <- c("foo.test.xyz", "baz.foosh", "bat")
 #' y <- c("ba","foosba.asd", "bats.at", "foos", "gams.asd")
-#' test <- grepsParallel(x, y)
+#' test <- grepsParallel(x, y, 2)
 #' }
 
 grepsParallel <- function(x, y, noCores, sepx = "\\.", sepy = "\\.", limitChar = 0, limitWord = 0, booster = 0.9, wordIgnore = NULL, checkBoth = TRUE, ignore.case = TRUE){
@@ -157,8 +157,20 @@ grepsParallel <- function(x, y, noCores, sepx = "\\.", sepy = "\\.", limitChar =
 
   stopCluster(cl)
 
-  result <- cbind(x, tmp[seq(1,nrow(tmp),2),])
-  rank <- cbind(x, tmp[seq(2,nrow(tmp),2),])
+  result <- cbind(x, tmp[seq(1,nrow(tmp),2),, drop= FALSE])
+  rank <- cbind(x, tmp[seq(2,nrow(tmp),2),, drop = FALSE])
+  row.names(result) <- NULL
+  row.names(rank) <- NULL
+
+  for(i in 1:nrow(result)){
+    a <- unique(result[i,-1])[!is.na(unique(result[i,-1]))]
+    for(j in 1:length(a)){
+      if(length(which(result[i,-1] == a[j])) > 1){
+        rank[i,which(result[i,-1] == a[j])[2:length(which(result[i,-1] == a[j]))] + 1] <- NA
+        result[i,which(result[i,-1] == a[j])[2:length(which(result[i,-1] == a[j]))] + 1] <- NA
+      }
+    }
+  }
 
   # given exact matches remove all others
 
@@ -177,8 +189,15 @@ grepsParallel <- function(x, y, noCores, sepx = "\\.", sepy = "\\.", limitChar =
   result <- as.data.frame(t(apply(result, 1, function(x) return(c(x[!is.na(x)],x[is.na(x)])))), stringsAsFactors = FALSE)
   rank <- as.data.frame(t(apply(rank, 1, function(x) return(c(x[!is.na(x)],x[is.na(x)])))), stringsAsFactors = FALSE)
 
-  result[,-1] <- data.frame(t(sapply(1:nrow(rank), function(i) return(result[i,-1][as.numeric(order(-as.numeric(rank[i,-1])))]))))
-  rank[,-1] <- data.frame(t(sapply(1:nrow(rank), function(i) return(rank[i,-1][as.numeric(order(-as.numeric(rank[i,-1])))]))))
+  if(ncol(rank) > 1){
+    if(!is.numeric(rank[,-1]) | !is.vector(rank[,-1])){
+      result[,-1] <- data.frame(t(sapply(1:nrow(rank), function(i) return(result[i,-1][as.numeric(order(-as.numeric(rank[i,-1])))]))))
+      rank[,-1] <- data.frame(t(sapply(1:nrow(rank), function(i) return(rank[i,-1][as.numeric(order(-as.numeric(rank[i,-1])))]))))
+    } else {
+      result[,-1] <- sapply(1:nrow(rank), function(i) return(result[i,-1][as.numeric(order(-as.numeric(rank[i,-1])))]))
+      rank[,-1] <- sapply(1:nrow(rank), function(i) return(rank[i,-1][as.numeric(order(-as.numeric(rank[i,-1])))]))
+    }
+  }
 
   # remove unneccessary NA columns
 

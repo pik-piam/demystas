@@ -100,13 +100,10 @@ greps <- function(x, y, sepx = "\\.", sepy = "\\.", limitChar = 0, limitWord = 0
     for(k in 1:length(yList)){
       if(x[i] == y[k] | (all(xList[[i]] %in% yList[[k]]) & all(yList[[k]] %in% xList[[i]]))) {
 
-        result[i,-1] <- NA
-        rank[i,-1] <- NA
         result[i,min(which(is.na(result[i,])))] <- y[k]
         rank[i,min(which(is.na(rank[i,])))] <- 99
-        break
 
-      } else {
+      } else if (!y[k] %in% result[i,-1]){
         checkIndex1 <- lapply(xList[[i]], function(x) return(grep(paste0("\\Q", x, "\\E"), yList[[k]], ignore.case = ignore.case)))
         check1 <- lapply(checkIndex1, length)
 
@@ -161,6 +158,18 @@ greps <- function(x, y, sepx = "\\.", sepy = "\\.", limitChar = 0, limitWord = 0
   }
   close(pb.overall)
 
+  v <- as.matrix(which(rank == 99, arr.ind = TRUE))
+
+  if(nrow(v) > 0){
+    q <- as.matrix(which(rank != 99, arr.ind = TRUE))
+    q <- q[which(q[,1] %in% v[,1]),,drop=FALSE]
+    q <- q[-which(q[,2] == 1),,drop=FALSE]
+    if(nrow(q) != 0){
+      result[q] <- NA
+      rank[q] <- NA
+    }
+  }
+
   # remove unneccessary NA columns
 
   if(length(which(colSums(is.na(result)) == nrow(result))) > 0){
@@ -171,7 +180,7 @@ greps <- function(x, y, sepx = "\\.", sepy = "\\.", limitChar = 0, limitWord = 0
   # rank results for easier reading
 
   if(ncol(rank) > 1){
-    if(!is.numeric(rank[,-1])){
+    if(!is.numeric(rank[,-1]) | !is.vector(rank[,-1])){
       result[,-1] <- data.frame(t(sapply(1:nrow(rank), function(i) return(result[i,-1][as.numeric(order(-rank[i,-1]))]))))
       rank[,-1] <- data.frame(t(sapply(1:nrow(rank), function(i) return(rank[i,-1][as.numeric(order(-rank[i,-1]))]))))
     } else {
