@@ -16,7 +16,13 @@ if(!require(devtools)) install.packages("devtools")
 devtools::install_github("AtreyaSh/demystas")
 ```
 
-Voila, the package is yours! Feel free to test it.
+Voila, the package is yours! Feel free to test it and contribute to development.
+
+In case the package is no longer needed, simply uninstall it by running this code in an R console:
+
+```r
+remove.packages("demystas")
+```
 
 ## Wikis
 
