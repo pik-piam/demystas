@@ -8,6 +8,11 @@
 #' @param global an object of class SpatialPolygonsDataFrame onto which `points` is mapped.
 #' @return a data frame corresponding to the coordinates in `points` mapped onto `global` with the attributes of `global`
 #' @author Atreya Shankar
+#' @importFrom sp spTransform
+#' @importFrom sp CRS
+#' @importFrom sp proj4string
+#' @importFrom sp over
+#' @importFrom sp SpatialPoints
 #' @export
 #' @examples
 #' \dontrun{
