@@ -15,7 +15,7 @@ Coordinates in `points` should be in the same column order as those in `global`}
 \item{inc}{a numerical value which indicates how much the entire bounding box of `global` shoud be segmented to find nearest countries. Defaults to 100.}
 }
 \value{
-a data frame with attributes from `global` about nearest countries to `points`
+a data frame with attributes from `global` about nearest polygon (country) to `points`
 }
 \description{
 Finds nearest polygon (country) to point(s), useful for cases where the `sp::over` function yields NA results

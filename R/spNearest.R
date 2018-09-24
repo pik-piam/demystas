@@ -7,7 +7,7 @@
 #' Coordinates in `points` should be in the same column order as those in `global`
 #' @param global an object of class SpatialPolygonsDataFrame onto which `points` is mapped.
 #' @param inc a numerical value which indicates how much the entire bounding box of `global` shoud be segmented to find nearest countries. Defaults to 100.
-#' @return a data frame with attributes from `global` about nearest countries to `points`
+#' @return a data frame with attributes from `global` about nearest polygon (country) to `points`
 #' @author Atreya Shankar
 #' @importFrom methods as
 #' @importFrom sp spTransform
