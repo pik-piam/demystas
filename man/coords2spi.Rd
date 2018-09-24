@@ -2,13 +2,13 @@
 % Please edit documentation in R/coords2spi.R
 \name{coords2spi}
 \alias{coords2spi}
-\title{Overlaying points onto polygons}
+\title{Convert coordinates to spatial information}
 \usage{
 coords2spi(points, global)
 }
 \arguments{
 \item{points}{a data frame with two columns of coordinates, or an object of class SpatialPoints or SpatialPointsDataFrame.
-These represent points to be mapped onto polygon(s).}
+These represent points to be mapped onto polygon(s). Coordinates in `points` should be in the same column order as those in `global`}
 
 \item{global}{an object of class SpatialPolygonsDataFrame onto which `points` is mapped.}
 }
@@ -16,7 +16,8 @@ These represent points to be mapped onto polygon(s).}
 a data frame corresponding to the coordinates in `points` mapped onto `global` with the attributes of `global`
 }
 \description{
-Overlays coordinates of class data frame, SpatialPoints or SpatialPointsDataFrame onto polygon(s) of class SpatialPolygonsDataFrame
+Overlays coordinates of class data frame, SpatialPoints or SpatialPointsDataFrame onto polygon(s) of class SpatialPolygonsDataFrame in order to retrieve relevant intersecting
+spatial information
 }
 \examples{
 \dontrun{

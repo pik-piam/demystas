@@ -3,7 +3,6 @@
 \docType{package}
 \name{demystas-package}
 \alias{demystas-package}
-\alias{demystas}
 \title{Demystifying Automation on Simple Tasks (demystas)}
 \description{
 There are a myriad of daily tasks which seem simple, but yet hide complex computational requirements.

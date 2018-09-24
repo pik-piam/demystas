@@ -2,12 +2,13 @@
 % Please edit documentation in R/spNearest.R
 \name{spNearest}
 \alias{spNearest}
-\title{Find nearest country (polygon) to point}
+\title{Detect nearest polygon (country) to point(s)}
 \usage{
 spNearest(points, global, inc = 100)
 }
 \arguments{
-\item{points}{a data frame with two columns of coordinates, or an object of class SpatialPoints or SpatialPointsDataFrame.}
+\item{points}{a data frame with two columns of coordinates, or an object of class SpatialPoints or SpatialPointsDataFrame.
+Coordinates in `points` should be in the same column order as those in `global`}
 
 \item{global}{an object of class SpatialPolygonsDataFrame onto which `points` is mapped.}
 
@@ -17,7 +18,7 @@ spNearest(points, global, inc = 100)
 a data frame with attributes from `global` about nearest countries to `points`
 }
 \description{
-Finds nearest country to a point, useful for cases where the `sp::over` function yield NA results
+Finds nearest polygon (country) to point(s), useful for cases where the `sp::over` function yields NA results
 }
 \examples{
 \dontrun{

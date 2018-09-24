@@ -1,6 +1,6 @@
 Package: demystas
 Title: Demystifying Automation on Simple Tasks
-Version: 1.3.0
+Version: 1.3.1
 Date: 2018-09-24
 Authors@R: person("Atreya", "Shankar", email = "shankar@pik-potsdam.de",
   role = c("aut", "cre"))
@@ -18,5 +18,6 @@ Imports: doParallel,
     sp,
     raster,
     geosphere,
-    methods
-ValidationKey: 2313740
+    methods,
+    parallel
+ValidationKey: 2331538

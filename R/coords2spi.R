@@ -1,10 +1,11 @@
-#' Overlaying points onto polygons
+#' Convert coordinates to spatial information
 #'
-#' Overlays coordinates of class data frame, SpatialPoints or SpatialPointsDataFrame onto polygon(s) of class SpatialPolygonsDataFrame
+#' Overlays coordinates of class data frame, SpatialPoints or SpatialPointsDataFrame onto polygon(s) of class SpatialPolygonsDataFrame in order to retrieve relevant intersecting
+#' spatial information
 #'
 #' @name coords2spi
 #' @param points a data frame with two columns of coordinates, or an object of class SpatialPoints or SpatialPointsDataFrame.
-#' These represent points to be mapped onto polygon(s).
+#' These represent points to be mapped onto polygon(s). Coordinates in `points` should be in the same column order as those in `global`
 #' @param global an object of class SpatialPolygonsDataFrame onto which `points` is mapped.
 #' @return a data frame corresponding to the coordinates in `points` mapped onto `global` with the attributes of `global`
 #' @author Atreya Shankar

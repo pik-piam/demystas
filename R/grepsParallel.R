@@ -23,6 +23,7 @@
 #' The second "rank" matrix contains a matrix with equivalent dimension as the first matrix. Instead of containing the matches from `y`, this matrix contains the matching
 #' scores of the respective components from the first matrix. A ranking score of 99 implies a perfect match. Perfect matches are isolated for each row.
 #' @import doParallel
+#' @importFrom parallel detectCores
 #' @importFrom snow makeSOCKcluster
 #' @importFrom snow stopCluster
 #' @importFrom foreach foreach
@@ -53,7 +54,7 @@ grepsParallel <- function(x, y, noCores, sepx = "\\.", sepy = "\\.", limitChar =
 
   if(!is.numeric(noCores)){
     stop("must specify noCores for parallel processing")
-  } else if(noCores > parallel::detectCores()){
+  } else if(noCores > detectCores()){
     stop("more noCores supplied than available cores")
   }
 

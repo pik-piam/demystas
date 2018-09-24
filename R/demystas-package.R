@@ -9,6 +9,6 @@
 #' which might help in making these "on-the-fly" tasks lighter and more automated.
 #'
 #' @name demystas-package
-#' @aliases demystas
+#' @aliases demystas-package
 #' @docType package
 NULL
