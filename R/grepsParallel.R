@@ -4,6 +4,7 @@
 #' from best to worst. The user is able to influence the algorithm by tweaking matching parameters.
 #'
 #' @name grepsParallel
+#' @aliases demystas
 #' @param x a character vector containing elements to be considered in pairwise grep-analysis. Words are separated by `sepx`.
 #' @param y a character vector containing elements to be considered in pairwise grep-analysis. Words are separated by `sepy`.
 #' @param noCores is a numerical value specifying the number of cores to be used for parallel computation.

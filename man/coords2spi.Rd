@@ -2,6 +2,7 @@
 % Please edit documentation in R/coords2spi.R
 \name{coords2spi}
 \alias{coords2spi}
+\alias{demystas}
 \title{Convert coordinates to spatial information}
 \usage{
 coords2spi(points, global)

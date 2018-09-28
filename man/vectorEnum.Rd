@@ -2,6 +2,7 @@
 % Please edit documentation in R/vectorEnum.R
 \name{vectorEnum}
 \alias{vectorEnum}
+\alias{demystas}
 \title{Enumerating vectors}
 \usage{
 vectorEnum(x, sep = ".")

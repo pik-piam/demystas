@@ -3,6 +3,7 @@
 #' Finds nearest polygon (country) to point(s), useful for cases where the `sp::over` function yields NA results
 #'
 #' @name spNearest
+#' @aliases demystas
 #' @param points a data frame with two columns of coordinates, or an object of class SpatialPoints or SpatialPointsDataFrame.
 #' Coordinates in `points` should be in the same column order as those in `global`
 #' @param global an object of class SpatialPolygonsDataFrame onto which `points` is mapped.
