@@ -2,7 +2,6 @@
 % Please edit documentation in R/greps.R
 \name{greps}
 \alias{greps}
-\alias{demystas}
 \title{Sequential pairwise grep-style matching}
 \usage{
 greps(x, y, sepx = "\\\\.", sepy = "\\\\.", limitChar = 0,
@@ -54,3 +53,4 @@ test <- greps(x, y)
 \author{
 Atreya Shankar
 }
+\concept{demystas}

@@ -2,7 +2,6 @@
 % Please edit documentation in R/grepsParallel.R
 \name{grepsParallel}
 \alias{grepsParallel}
-\alias{demystas}
 \title{Parallel pairwise grep-style matching}
 \usage{
 grepsParallel(x, y, noCores, sepx = "\\\\.", sepy = "\\\\.",
@@ -56,3 +55,4 @@ test <- grepsParallel(x, y, 2)
 \author{
 Atreya Shankar
 }
+\concept{demystas}

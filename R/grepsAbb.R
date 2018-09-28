@@ -3,7 +3,7 @@
 #' Sequentially maps abbreviations onto complete words and returns a matrix of valid possibilities.
 #'
 #' @name grepsAbb
-#' @aliases demystas
+#' @concept demystas
 #' @param x a character vector containing abbreviations.
 #' @param y a character vector containing whole words that could correspond to abbreviations.
 #' @return a matrix with total number of rows equal to the length of vector `x`. The first column is a repeat of vector `x`. Further columns represent matched possible `y` vector components.

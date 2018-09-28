@@ -4,7 +4,6 @@
 #' spatial information
 #'
 #' @name coords2spi
-#' @aliases demystas
 #' @param points a data frame with two columns of coordinates, or an object of class SpatialPoints or SpatialPointsDataFrame.
 #' These represent points to be mapped onto polygon(s). Coordinates in `points` should be in the same column order as those in `global`
 #' @param global an object of class SpatialPolygonsDataFrame onto which `points` is mapped.

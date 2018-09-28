@@ -3,7 +3,7 @@
 #' Enumarates components of a vector in order to make each component unique. Useful for cases where duplicates of vector components must be avoided.
 #'
 #' @name vectorEnum
-#' @aliases demystas
+#' @concept demystas
 #' @param x a vector with possibly duplicated components
 #' @param sep a character indicating how the enumeration and original vector components should be separated. Defaults to "."
 #' @return a vector in the same order and dimension as `x` with each component uniquely enumerated

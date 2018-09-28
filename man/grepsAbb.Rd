@@ -2,7 +2,6 @@
 % Please edit documentation in R/grepsAbb.R
 \name{grepsAbb}
 \alias{grepsAbb}
-\alias{demystas}
 \title{Sequential abbreviation mapping}
 \usage{
 grepsAbb(x, y)
@@ -29,3 +28,4 @@ test <- grepsAbb(x, y)
 \author{
 Atreya Shankar
 }
+\concept{demystas}

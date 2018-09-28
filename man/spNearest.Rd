@@ -2,7 +2,6 @@
 % Please edit documentation in R/spNearest.R
 \name{spNearest}
 \alias{spNearest}
-\alias{demystas}
 \title{Detect nearest polygon (country) to point(s)}
 \usage{
 spNearest(points, global, inc = 100)
@@ -33,3 +32,4 @@ test <- spNearest(points, getMap(resolution="high"))
 \author{
 Atreya Shankar
 }
+\concept{demystas}
