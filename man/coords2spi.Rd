@@ -29,3 +29,4 @@ test <- coords2spi(as.data.frame(cbind(60,50)), getMap(resolution="low"))
 \author{
 Atreya Shankar
 }
+\concept{demystas}

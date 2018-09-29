@@ -12,9 +12,9 @@
 
 <meta name="author" content="Atreya Shankar" />
 
-<meta name="date" content="2018-09-28" />
+<meta name="date" content="2018-09-29" />
 
-<title>demystas</title>
+<title>Utilizing greps-type functions in demystas</title>
 
 
 
@@ -68,18 +68,23 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 
 
 
-<h1 class="title toc-ignore">demystas</h1>
+<h1 class="title toc-ignore">Utilizing greps-type functions in demystas</h1>
 <h4 class="author"><em>Atreya Shankar</em></h4>
-<h4 class="date"><em>2018-09-28</em></h4>
+<h4 class="date"><em>2018-09-29</em></h4>
 
 
 
-<p>Vignettes are long form documentation commonly included in packages. Because they are part of the distribution of the package, they need to be as compact as possible. The <code>html_vignette</code> output type provides a custom style sheet (and tweaks some options) to ensure that the resulting html is as small as possible. The <code>html_vignette</code> format:</p>
-<ul>
-<li>Never uses retina figures</li>
-<li>Has a smaller default figure size</li>
-<li>Uses a custom CSS stylesheet instead of the default Twitter Bootstrap style</li>
-</ul>
+<p>Greps-style functions form a key part of the <code>demystas</code> package. These functions assist with matching vectors of strings or keywords in order to deliver the best possible matchings. The three greps-style functions that we offer are:</p>
+<ol style="list-style-type: decimal">
+<li><code>greps</code>: sequential string mapping</li>
+<li><code>grepsParallel</code>: parallel string mapping for large vectors</li>
+<li><code>grepsAbb</code>: sequential abbrevation to complete word mapping</li>
+</ol>
+<div id="greps-and-grepsparallel" class="section level2">
+<h2>1. <code>greps</code> and <code>grepsParallel</code></h2>
+<p>Assume we have two vectors containing strings, here <code>x</code> and <code>y</code>.</p>
+<p>data(“x”) data(“y”) knitr::kable(cbind(x,y))</p>
+</div>
 <div id="vignette-info" class="section level2">
 <h2>Vignette Info</h2>
 <p>Note the various macros within the <code>vignette</code> section of the metadata block above. These are required in order to instruct R how to build the vignette. Note that you should change the <code>title</code> field and the <code>\VignetteIndexEntry</code> to match the title of your vignette.</p>

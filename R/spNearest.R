@@ -10,6 +10,7 @@
 #' @param inc a numerical value which indicates how much the entire bounding box of `global` shoud be segmented to find nearest countries. Defaults to 100.
 #' @return a data frame with attributes from `global` about nearest polygon (country) to `points`
 #' @author Atreya Shankar
+#' @importFrom stats runif
 #' @importFrom methods as
 #' @importFrom sp spTransform
 #' @importFrom sp CRS
@@ -78,8 +79,8 @@ spNearest <- function(points, global, inc = 100){
 
     if(all(class(var1) %in% c("simpleWarning", "warning", "condition"))){
       if(var1$message == "polygons do not intersect"){
-        buffer <- buffer*2
-      } else buffer <- buffer/2
+        buffer <- buffer*runif(1, min = 1.1, max = 2)
+      } else buffer <- buffer/runif(1, min = 1.1, max = 2)
     } else{
       nice <- intersect(bpoly, global)
       result[[i]] <- nice@data[dist2Line(points[i,], nice)[,"ID"],]

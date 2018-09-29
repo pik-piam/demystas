@@ -1,10 +1,10 @@
 ---
-title: "demystas"
+title: "Utilizing greps-type functions in demystas"
 author: "Atreya Shankar"
 date: "`r Sys.Date()`"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{Vignette Title}
+  %\VignetteIndexEntry{Utilizing greps-type functions in demystas}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
@@ -16,11 +16,23 @@ knitr::opts_chunk$set(
 )
 ```
 
-Vignettes are long form documentation commonly included in packages. Because they are part of the distribution of the package, they need to be as compact as possible. The `html_vignette` output type provides a custom style sheet (and tweaks some options) to ensure that the resulting html is as small as possible. The `html_vignette` format:
+Greps-style functions form a key part of the `demystas` package. These functions assist with matching vectors of strings or keywords in order to deliver the best possible matchings. The three greps-style functions that we offer are:
 
-- Never uses retina figures
-- Has a smaller default figure size
-- Uses a custom CSS stylesheet instead of the default Twitter Bootstrap style
+1. `greps`: sequential string mapping
+2. `grepsParallel`: parallel string mapping for large vectors
+3. `grepsAbb`: sequential abbrevation to complete word mapping
+
+## 1. `greps` and `grepsParallel`
+
+Assume we have two vectors containing strings, here `x` and `y`.
+
+data("x")
+data("y")
+knitr::kable(cbind(x,y))
+
+```{r, echo=FALSE}
+
+```
 
 ## Vignette Info
 
