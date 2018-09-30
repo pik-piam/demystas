@@ -49,9 +49,17 @@ grepsParallel <- function(x, y, noCores, sepx = "\\.", sepy = "\\.", limitChar =
     stop("x must be a vector")
   }
 
+  if(sum(is.na(x)) == length(x)){
+    stop("x contains all NAs")
+  } else x <- x[!is.na(x)]
+
   if(!is.vector(y)){
     stop("y must be a vector")
   }
+
+  if(sum(is.na(y)) == length(y)){
+    stop("y contains all NAs")
+  } else y <- y[!is.na(y)]
 
   if(!is.numeric(noCores)){
     stop("must specify noCores for parallel processing")
@@ -159,8 +167,14 @@ grepsParallel <- function(x, y, noCores, sepx = "\\.", sepy = "\\.", limitChar =
 
   stopCluster(cl)
 
-  result <- cbind(x, tmp[seq(1,nrow(tmp),2),, drop= FALSE])
-  rank <- cbind(x, tmp[seq(2,nrow(tmp),2),, drop = FALSE])
+  if(length(y) != 1){
+    result <- cbind(x, tmp[seq(1,nrow(tmp),2),, drop= FALSE])
+    rank <- cbind(x, tmp[seq(2,nrow(tmp),2),, drop = FALSE])
+  } else {
+    result <- cbind(x, tmp[,1])
+    rank <- cbind(x, tmp[,2])
+  }
+
   row.names(result) <- NULL
   row.names(rank) <- NULL
 
@@ -192,7 +206,7 @@ grepsParallel <- function(x, y, noCores, sepx = "\\.", sepy = "\\.", limitChar =
   rank <- as.data.frame(t(apply(rank, 1, function(x) return(c(x[!is.na(x)],x[is.na(x)])))), stringsAsFactors = FALSE)
 
   if(ncol(rank) > 1){
-    if(!is.numeric(rank[,-1]) | !is.vector(rank[,-1])){
+    if(!is.numeric(rank[,-1]) & !is.vector(rank[,-1])){
       result[,-1] <- data.frame(t(sapply(1:nrow(rank), function(i) return(result[i,-1][as.numeric(order(-as.numeric(rank[i,-1])))]))))
       rank[,-1] <- data.frame(t(sapply(1:nrow(rank), function(i) return(rank[i,-1][as.numeric(order(-as.numeric(rank[i,-1])))]))))
     } else {

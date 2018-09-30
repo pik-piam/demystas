@@ -42,9 +42,17 @@ greps <- function(x, y, sepx = "\\.", sepy = "\\.", limitChar = 0, limitWord = 0
     stop("x must be a vector")
   }
 
+  if(sum(is.na(x)) == length(x)){
+    stop("x contains all NAs")
+  } else x <- x[!is.na(x)]
+
   if(!is.vector(y)){
     stop("y must be a vector")
   }
+
+  if(sum(is.na(y)) == length(y)){
+    stop("y contains all NAs")
+  } else y <- y[!is.na(y)]
 
   if(!is.character(sepx) & !is.null(sepx)){
     stop("sepx must be NULL or a regex-style expression")
@@ -181,7 +189,7 @@ greps <- function(x, y, sepx = "\\.", sepy = "\\.", limitChar = 0, limitWord = 0
   # rank results for easier reading
 
   if(ncol(rank) > 1){
-    if(!is.numeric(rank[,-1]) | !is.vector(rank[,-1])){
+    if(!is.numeric(rank[,-1]) & !is.vector(rank[,-1])){
       result[,-1] <- data.frame(t(sapply(1:nrow(rank), function(i) return(result[i,-1][as.numeric(order(-rank[i,-1]))]))))
       rank[,-1] <- data.frame(t(sapply(1:nrow(rank), function(i) return(rank[i,-1][as.numeric(order(-rank[i,-1]))]))))
     } else {

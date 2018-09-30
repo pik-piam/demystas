@@ -1,77 +1,172 @@
 ---
-title: "Utilizing greps-type functions in demystas"
+title: "greps-type functions in demystas"
 author: "Atreya Shankar"
 date: "`r Sys.Date()`"
-output: rmarkdown::html_vignette
+output: rmarkdown::html_vignette  
 vignette: >
-  %\VignetteIndexEntry{Utilizing greps-type functions in demystas}
+  %\VignetteIndexEntry{greps-type functions in demystas}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
 
-```{r setup, include = FALSE}
+<style>
+    body {
+          max-width: 800px;
+          margin: auto;
+          padding: 1em;
+          line-height: 20px; 
+    }
+</style>
+
+```{r set-options, include = FALSE, cache=FALSE}
 knitr::opts_chunk$set(
   collapse = TRUE,
   comment = "#>"
 )
 ```
 
-Greps-style functions form a key part of the `demystas` package. These functions assist with matching vectors of strings or keywords in order to deliver the best possible matchings. The three greps-style functions that we offer are:
+greps-style functions form a key aspect of the `demystas` package. These functions assist with matching vectors of strings or keywords in order to deliver the best possible matchings. The three greps-style functions that we offer are:
 
 1. `greps`: sequential string mapping
 2. `grepsParallel`: parallel string mapping for large vectors
 3. `grepsAbb`: sequential abbrevation to complete word mapping
 
-## 1. `greps` and `grepsParallel`
+## 1. `greps` function
 
-Assume we have two vectors containing strings, here `x` and `y`.
+### Basic functionality
 
-data("x")
-data("y")
-knitr::kable(cbind(x,y))
+Assume we have two vectors containing strings, here `x` and `y`.These vectors are included in the `/inst/extdata` directory of this R package and can be accessed as such:
 
-```{r, echo=FALSE}
+```{r, echo=TRUE, eval=TRUE}
+x <- read.csv(system.file("extdata", "sample1.csv", package = "demystas"), stringsAsFactors = FALSE)[337:347,1]
 
+y <- read.csv(system.file("extdata", "sample2.csv", package = "demystas"), stringsAsFactors = FALSE)[29:35,1]
 ```
 
-## Vignette Info
+`x` shows an excerpt of input REMIND data from the European Energy datasheets. `y` represents an excerpt of REMIND model output. Our goal is to create some mappings from `x` to `y` in order to compare parameters and conduct validations. 
 
-Note the various macros within the `vignette` section of the metadata block above. These are required in order to instruct R how to build the vignette. Note that you should change the `title` field and the `\VignetteIndexEntry` to match the title of your vignette.
-
-## Styles
-
-The `html_vignette` template includes a basic CSS theme. To override this theme you can specify your own CSS in the document metadata as follows:
-
-    output: 
-      rmarkdown::html_vignette:
-        css: mystyles.css
-
-## Figures
-
-The figure sizes have been customised so that you can easily put two images side-by-side. 
-
-```{r, fig.show='hold'}
-plot(1:10)
-plot(10:1)
-```
-
-You can enable figure captions by `fig_caption: yes` in YAML:
-
-    output:
-      rmarkdown::html_vignette:
-        fig_caption: yes
-
-Then you can use the chunk option `fig.cap = "Your figure caption."` in **knitr**.
-
-## More Examples
-
-You can write math expressions, e.g. $Y = X\beta + \epsilon$, footnotes^[A footnote here.], and tables, e.g. using `knitr::kable()`.
+Here is what `x` and `y` look like:
 
 ```{r, echo=FALSE, results='asis'}
-knitr::kable(head(mtcars, 10))
+new <- data.frame(matrix(ncol = 2, nrow = 0))
+new[1:length(x),1] <- x
+new[1:length(y),2] <- y
+names(new) <- c("x", "y")
+knitr::kable(new)
 ```
 
-Also a quote using `>`:
+Here, we can see keywords in `x` are separated by the character `"."` and keywords in `y` are separated by the character `"|"`. We can input these parameters into the `greps` function as regex-style expressions.
 
-> "He who gives up [code] safety for [code] speed deserves neither."
-([via](https://twitter.com/hadleywickham/status/504368538874703872))
+```{r, echo=TRUE, eval = FALSE}
+test <- demystas::greps(x, y, sepx = "\\.", sepy = "\\|")
+```
+
+The functions produces a list with 2 matrices. The first matrix contains mappings from `x` to `y` and the second contains the respective matching scores. Take a look:
+
+```{r, echo=FALSE, results='hide'}
+test <- demystas::greps(x, y, sepx = "\\.", sepy = "\\|")
+```
+```{r, echo=TRUE, eval = FALSE, results='markup'}
+View(test[[1]])
+```
+```{r, echo=FALSE, results='asis'}
+knitr::kable(test[[1]])
+```
+```{r, echo=TRUE, eval = FALSE, results='markup'}
+View(test[[2]])
+```
+```{r, echo=FALSE, results='asis'}
+knitr::kable(test[[2]])
+```
+
+### Advanced functionality
+
+The `greps` functions contains some parameters to tweak the matching process based on the user's perspective. Some of the key parameters are:
+
+1. `limitWord`: a numerical threshold greater than or equal to 0 for entire keyword matching
+2. `limitChar`: a numerical threshold between 0 and 1 for string subset-based matching
+3. `booster`: a numerical threshold which boosts the score of well-matched sub-strings
+4. `wordIgnore`: a character vector of strings which should be ignored for the matching process
+
+We will briefly go through `limitWord` and `limitChar`.
+
+#### a. `limitWord`
+
+As per the previous example, if we want to filter keywords which have a matching score greater than `0.15`, we can execute the following:
+
+```{r, echo=TRUE, eval = FALSE}
+test <- demystas::greps(x, y, sepx = "\\.", sepy = "\\|", limitWord = 0.15)
+```
+```{r, echo=FALSE, results='hide'}
+test <- demystas::greps(x, y, sepx = "\\.", sepy = "\\|", limitWord = 0.15)
+```
+```{r, echo=TRUE, eval = FALSE, results='markup'}
+View(test[[1]])
+```
+```{r, echo=FALSE, results='asis'}
+knitr::kable(test[[1]])
+```
+
+Here, we see a smaller matrix of matchings with matching scores below or equal to 0.15 removed. This might be useful for filtering purposes.
+
+#### b. `limitChar`
+
+We can also notice that the bulk of the matchings occur because `Xport` in `x` is a case-insensitive subset of `Exports` in `y`. If we increase the value of `limitChar` to a large value like `0.9`, then `Xport` will no longer match to `Exports` since it does match more than 90% of its own characters.
+
+```{r, echo=TRUE, eval = FALSE}
+test <- demystas::greps(x, y, sepx = "\\.", sepy = "\\|", limitWord = 0.15, limitChar = 0.9)
+```
+```{r, echo=FALSE, results='hide'}
+test <- demystas::greps(x, y, sepx = "\\.", sepy = "\\|", limitWord = 0.15, limitChar = 0.9)
+```
+```{r, echo=TRUE, eval = FALSE, results='markup'}
+View(test[[1]])
+```
+```{r, echo=FALSE, results='asis'}
+knitr::kable(test[[1]])
+```
+
+Here, we can see that there are no matchings altogether. This is because of our `limitChar` parameter being set too high. We can naturally reduce this parameter until we achieve more appropriate matchings.
+
+The key idea of this parameter is to be able to omit non-meaningful matchings such as eg. `pe` being matched to `shape`; but allowing meaningful matchings of eg. `Xport` to `Exports`.
+
+## 2. `grepsParallel` function
+
+This function has the exact same functionalities as the `greps` function, except it can be executed in a parallel manner instead of a sequential manner. This is particularly useful for conducting keyword mappings on large vectors sets by reducing the time required for computation. Naturally, this is also useful for execution on a cluster.
+
+The only additional parameter here is `noCores`, where the user specifies the number of cores to be used for parallel computation.
+
+As a simple example, consider the two following vectors `x` and `y`:
+
+```{r, echo=TRUE, eval=FALSE}
+x <- read.csv(system.file("extdata", "sample1.csv", package = "demystas"), stringsAsFactors = FALSE)[1:100,1]
+
+y <- read.csv(system.file("extdata", "sample2.csv", package = "demystas"), stringsAsFactors = FALSE)[1:300,1]
+```
+
+To match the keywords through our `greps` functions, we need to process $100\times300\times2=60,000$ cases.
+
+```{r, echo=TRUE, eval=FALSE}
+test1 <- demystas::greps(x, y, sepx = "\\.", sepy = "\\|", limitWord = 0.1, limitChar = 0.5)
+
+test2 <- demystas::grepsParallel(x, y, noCores = 4, sepx = "\\.", sepy = "\\|", limitWord = 0.1, limitChar = 0.5)
+```
+```{r, echo=FALSE, results='asis'}
+new <- data.frame(matrix(ncol = 3, nrow = 0))
+new[1,1] <- "84.441s"
+new[1,2] <- "18.761s"
+new[1,3] <- 84.441/18.761
+names(new) <- c("greps", "grepsParallel", "speedRatio (parallel:sequential)")
+knitr::kable(new)
+```
+
+In this case, we can see for even $60,000$ cases, the `grepsParallel` function is $\sim4.5$ times faster than the corresponding `greps` function.
+
+### 3. `grepsAbb` function
+
+## Visions
+- show trade off for parallel timings
+- abbreviation example for non-consistent countries
+- show coords2spi for points only and projection being done automatically
+- show spNearest maps for perspective
+- show vectorEnum for complex vector case
