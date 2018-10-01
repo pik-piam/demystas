@@ -55,9 +55,9 @@ spNearest <- function(points, global, inc = 100){
   result <- list()
   global <- spTransform(global, CRS(proj4string(global)))
   bufferp <- apply(global@bbox, 1, diff)/inc
+  buffer <- bufferp
   bbp <- global@bbox
   bb <- bbp
-  buffer <- bufferp
 
   start <- proc.time()
 
