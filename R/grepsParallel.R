@@ -47,17 +47,13 @@ grepsParallel <- function(x, y, noCores, sepx = "\\.", sepy = "\\.", limitChar =
 
   if(!is.vector(x)){
     stop("x must be a vector")
-  }
-
-  if(sum(is.na(x)) == length(x)){
+  } else if(sum(is.na(x)) == length(x)){
     stop("x contains all NAs")
   } else x <- x[!is.na(x)]
 
   if(!is.vector(y)){
     stop("y must be a vector")
-  }
-
-  if(sum(is.na(y)) == length(y)){
+  } else if(sum(is.na(y)) == length(y)){
     stop("y contains all NAs")
   } else y <- y[!is.na(y)]
 
