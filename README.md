@@ -8,12 +8,26 @@ This package aims to offer useful functions for data analysts which might help i
 
 ## Installation
 
-To install this package, simply open up a local R console and execute the following:
+### A. Classic Installation
+
+1. Clone this repository and navigate into its main directory
+
+```shell
+$ git clone https://github.com/AtreyaSh/demystas && cd demystas
+```
+2. Install the package and build its vignettes
+
+```shell
+$ R -e "if(!require(devtools)) install.packages("devtools"); devtools::install(build_vignettes = TRUE)"
+```
+### B. Quick Installation
+
+Simply open up a local R console and execute the following:
 
 ```r
-if(!require(devtools)) install.packages("devtools")
+> if(!require(devtools)) install.packages("devtools")
 
-devtools::install_github("AtreyaSh/demystas")
+> devtools::install_github("AtreyaSh/demystas", build_vignettes = TRUE)
 ```
 
 Voila, the package is yours! Feel free to test it and contribute to development.
@@ -23,10 +37,6 @@ In case the package is no longer needed, simply uninstall it by running this cod
 ```r
 remove.packages("demystas")
 ```
-
-## Wikis
-
-Comprehensive wikis for our functions are under development... :snail:
 
 ## Author
 
