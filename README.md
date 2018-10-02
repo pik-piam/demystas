@@ -8,20 +8,6 @@ This package aims to offer useful functions for data analysts which might help i
 
 ## Installation
 
-### A. Classic Installation
-
-1. Clone this repository and navigate into its main directory
-
-```shell
-$ git clone https://github.com/AtreyaSh/demystas && cd demystas
-```
-2. Install the package and build its vignettes
-
-```shell
-$ R -e 'if(!require(devtools)) install.packages("devtools"); devtools::install(build_vignettes = TRUE)'
-```
-### B. Quick Installation
-
 Simply open up a local R console and execute the following:
 
 ```r
