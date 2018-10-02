@@ -79,6 +79,8 @@ View(test[[2]])
 knitr::kable(test[[2]])
 ```
 
+With these results, a human could then begin parsing the data row-by-row in order to select truly relevant or similar mappings. This algorithm naturally cannot provide a complete solution for mapping purposes, but it narrows down the search space for a human to do the more "intelligent" work.
+
 ### Advanced functionality
 
 The `greps` functions contains some parameters to tweak the matching process based on the user's perspective. Some of the key parameters are:
@@ -144,7 +146,7 @@ x <- read.csv(system.file("extdata", "sample1.csv", package = "demystas"), strin
 y <- read.csv(system.file("extdata", "sample2.csv", package = "demystas"), stringsAsFactors = FALSE)[1:300,1]
 ```
 
-To match the keywords through our `greps` functions, we need to process $100\times300\times2=60,000$ cases.
+To match the keywords through our `greps` functions, we need to process 100 x 300 x 2 = 60,000 cases.
 
 ```{r, echo=TRUE, eval=FALSE}
 test1 <- demystas::greps(x, y, sepx = "\\.", sepy = "\\|", limitWord = 0.1, limitChar = 0.5)
@@ -156,17 +158,52 @@ new <- data.frame(matrix(ncol = 3, nrow = 0))
 new[1,1] <- "84.441s"
 new[1,2] <- "18.761s"
 new[1,3] <- 84.441/18.761
-names(new) <- c("greps", "grepsParallel", "speedRatio (parallel:sequential)")
+names(new) <- c("greps", "grepsParallel", "speedRatio (par:seq)")
 knitr::kable(new)
 ```
 
-In this case, we can see for even $60,000$ cases, the `grepsParallel` function is $\sim4.5$ times faster than the corresponding `greps` function.
+In this case given `x` and `y`, we can see that the `grepsParallel` function is ~4.5 times faster than the corresponding `greps` function.
+
+Below, we plotted the execution time required for the sequential `greps` algorithm (red) against that of the parallel `grepsParallel` algorithm (blue). 
+
+We essentially kept `x` at its maximum length and increased the length of `y` incrementally. Here, we can see that the sequential algorithm performs slightly better than the parallel algorithm until ~30,000 matching cases, After this, significant improvements in execution time manifest for the parallel algorithm. 
+
+```{r echo=FALSE, out.width='70%', fig.align='center'}
+knitr::include_graphics('./seqVparTime.png')
+```
+
+This can also be visualized by the speed ratio (black) of the parallel algorithm compared to the sequential algorithm. The benefits of the parallel algorithm appear to manifest at around ~30,000 matching cases. This is of course a subjective analysis; and the exact results would vary depending on the exact components of `x` and `y`.
+
+```{r echo=FALSE, out.width='70%', fig.align='center'}
+knitr::include_graphics('./seqVparSpeed.png')
+```
 
 ### 3. `grepsAbb` function
 
-## Visions
-- show trade off for parallel timings
-- abbreviation example for non-consistent countries
-- show coords2spi for points only and projection being done automatically
-- show spNearest maps for perspective
-- show vectorEnum for complex vector case
+The `grepsAbb` function essentially maps abbreviations to whole words using a logical mapping alogrithm. A useful example could be mapping non-ISO3 country abbreviations to country names. For these cases, there is no standard to map abbreviations to words, and therefore we could use the `grepsAbb` algorithm.
+
+Here, we consider the following datasets:
+
+```{r, echo=TRUE, eval=TRUE}
+abb <- read.csv(system.file("extdata", "sample4.csv", package = "demystas"), stringsAsFactors = FALSE)[,1]
+
+words <- read.csv(system.file("extdata", "sample3.csv", package = "demystas"), stringsAsFactors = FALSE)[,1]
+```
+```{r, echo=FALSE, results='asis'}
+new <- data.frame(matrix(ncol = 2, nrow = 0))
+new[1:length(abb),1] <- abb
+new[1:length(words),2] <- words
+names(new) <- c("abb", "words")
+knitr::kable(new)
+```
+
+We will now apply the algorithm as below. The result will be a matrix of possible matchings.
+
+```{r, echo=TRUE, eval = TRUE, results='hide'}
+test <- demystas::grepsAbb(abb, words)
+```
+```{r, echo=FALSE, results='asis'}
+knitr::kable(test)
+```
+
+This matrix narrows down the mappings, allowing the human to perform the remaining "intelligent" selections to complete the mapping.
