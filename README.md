@@ -18,7 +18,7 @@ $ git clone https://github.com/AtreyaSh/demystas && cd demystas
 2. Install the package and build its vignettes
 
 ```shell
-$ R -e "if(!require(devtools)) install.packages('devtools'); devtools::install(build_vignettes = TRUE)"
+$ R -e 'if(!require(devtools)) install.packages("devtools"); devtools::install(build_vignettes = TRUE)'
 ```
 ### B. Quick Installation
 
