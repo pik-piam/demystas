@@ -32,7 +32,7 @@ remove.packages("demystas")
 
 ## Contribution
 
-In order to contribute to the development of this package on GitHub, we would recommend reviewing some guidelines here: [CONTRIB.md](https://github.com/AtreyaSh/demystas/blob/master/CONTRIB.md)
+In order to contribute to the development of this package on GitHub, we would recommend reviewing some guidelines here: [CONTRIB.md](https://github.com/AtreyaSh/demystas/blob/master/vignettes/CONTRIB.md)
 
 ## Author
 
