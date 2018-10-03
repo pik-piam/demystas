@@ -27,7 +27,7 @@ To review our vignettes and help pages for our functions, simply execute the fol
 In case the package is no longer needed, simply uninstall it by running this code in an R console:
 
 ```r
-remove.packages("demystas")
+> remove.packages("demystas")
 ```
 
 ## Contribution
