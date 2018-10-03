@@ -17,7 +17,7 @@ a data frame corresponding to the coordinates in `points` mapped onto `global` w
 }
 \description{
 Overlays coordinates of class data frame, SpatialPoints or SpatialPointsDataFrame onto polygon(s) of class SpatialPolygonsDataFrame in order to retrieve relevant intersecting
-spatial information
+spatial information. Utilizes the `sp::over` function at the backend.
 }
 \examples{
 \dontrun{
@@ -25,6 +25,9 @@ spatial information
 require(rworldmap)
 test <- coords2spi(as.data.frame(cbind(60,50)), getMap(resolution="low"))
 }
+}
+\seealso{
+\code{\link[sp]{over}}
 }
 \author{
 Atreya Shankar

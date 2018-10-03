@@ -1,6 +1,7 @@
 #' Detect nearest polygon (country) to point(s)
 #'
-#' Finds nearest polygon (country) to point(s), useful for cases where the `sp::over` function yields NA results
+#' Finds nearest polygon (country) to point(s), useful for cases where the `sp::over` function yields NA results.
+#' Should be used with unprojected coordinates íe. lon/lat, ideally on the WGS84 ellipsoid
 #'
 #' @name spNearest
 #' @concept demystas
@@ -24,6 +25,7 @@
 #' @importFrom utils txtProgressBar
 #' @importFrom utils setTxtProgressBar
 #' @export
+#' @seealso \code{\link[geosphere]{dist2Line}}
 #' @examples
 #' \dontrun{
 #'

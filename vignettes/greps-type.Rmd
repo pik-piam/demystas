@@ -1,10 +1,10 @@
 ---
-title: "greps-type functions in demystas"
+title: "greps-type functions (demystas)"
 author: "Atreya Shankar"
 date: "`r Sys.Date()`"
 output: rmarkdown::html_vignette  
 vignette: >
-  %\VignetteIndexEntry{greps-type functions in demystas}
+  %\VignetteIndexEntry{greps-type functions (demystas)}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
@@ -146,7 +146,7 @@ x <- read.csv(system.file("extdata", "sample1.csv", package = "demystas"), strin
 y <- read.csv(system.file("extdata", "sample2.csv", package = "demystas"), stringsAsFactors = FALSE)[1:300,1]
 ```
 
-To match the keywords through our `greps` functions, we need to process 100 x 300 x 2 = 60,000 cases.
+To match the keywords through our `greps` functions, we need to process 100 x 300 x 2 = 60,000 cases. Here we compare the sequential `greps` functions in `test1` against the parallel `grepsParallel` function in `test2`.
 
 ```{r, echo=TRUE, eval=FALSE}
 test1 <- demystas::greps(x, y, sepx = "\\.", sepy = "\\|", limitWord = 0.1, limitChar = 0.5)

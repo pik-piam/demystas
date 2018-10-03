@@ -11,18 +11,28 @@ This package aims to offer useful functions for data analysts which might help i
 Simply open up a local R console and execute the following:
 
 ```r
-if(!require(devtools)) install.packages("devtools")
+> if(!require(devtools)) install.packages("devtools")
 
-devtools::install_github("AtreyaSh/demystas", build_vignettes = TRUE)
+> devtools::install_github("AtreyaSh/demystas", build_vignettes = TRUE)
 ```
 
-Voila, the package is yours! Feel free to test it and contribute to development.
+Voila, the package is yours! Feel free to test and develop it.
+
+To review our vignettes and help pages for our functions, simply execute the following:
+
+```r
+> ??demystas
+```
 
 In case the package is no longer needed, simply uninstall it by running this code in an R console:
 
 ```r
 remove.packages("demystas")
 ```
+
+## Contribution
+
+In order to contribute to the development of this package on GitHub, we would recommend reviewing some guidelines here: [CONTRIB.md](https://github.com/AtreyaSh/demystas/blob/master/CONTRIB.md)
 
 ## Author
 

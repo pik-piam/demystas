@@ -1,7 +1,7 @@
 #' Convert coordinates to spatial information
 #'
 #' Overlays coordinates of class data frame, SpatialPoints or SpatialPointsDataFrame onto polygon(s) of class SpatialPolygonsDataFrame in order to retrieve relevant intersecting
-#' spatial information
+#' spatial information. Utilizes the `sp::over` function at the backend.
 #'
 #' @name coords2spi
 #' @concept demystas
@@ -16,6 +16,7 @@
 #' @importFrom sp over
 #' @importFrom sp SpatialPoints
 #' @export
+#' @seealso \code{\link[sp]{over}}
 #' @examples
 #' \dontrun{
 #'

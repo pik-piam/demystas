@@ -18,7 +18,8 @@ Coordinates in `points` should be in the same column order as those in `global`}
 a data frame with attributes from `global` about nearest polygon (country) to `points`
 }
 \description{
-Finds nearest polygon (country) to point(s), useful for cases where the `sp::over` function yields NA results
+Finds nearest polygon (country) to point(s), useful for cases where the `sp::over` function yields NA results.
+Should be used with unprojected coordinates íe. lon/lat, ideally on the WGS84 ellipsoid
 }
 \examples{
 \dontrun{
@@ -28,6 +29,9 @@ require(rworldxtra)
 points <- rbind(c(-81.779,52.234), c(-80.873, 51.126))
 test <- spNearest(points, getMap(resolution="high"))
 }
+}
+\seealso{
+\code{\link[geosphere]{dist2Line}}
 }
 \author{
 Atreya Shankar

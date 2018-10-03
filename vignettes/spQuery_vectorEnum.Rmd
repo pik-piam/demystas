@@ -1,0 +1,60 @@
+---
+title: "spatial queries and vector enumeration (demystas)"
+author: "Atreya Shankar"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{spatial queries and vector enumeration (demystas)}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+<style>
+    body {
+          max-width: 800px;
+          margin: auto;
+          padding: 1em;
+          line-height: 20px; 
+    }
+</style>
+
+```{r setup, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+Other than greps-type functions, `demystas` provides other interesting and useful functions which fall under the categories of spatial querying and vector enumeration. Following are the key functions:
+
+1. `coords2spi`: overlays coordinates of class data frame, SpatialPoints or SpatialPointsDataFrame onto a global polygon of class SpatialPolygonsDataFrame.
+
+2. `spNearest`: used to complement the `coords2spi` function by finding the nearest polygon to points that do not lie directly on a polygon. This function should be used on unprojected coordinates ie. lon/lat, ideally with the WGS84 ellipsoid.
+
+3. `vectorEnum`: uniquely enumerates a vector's components regardless of the order or distribution of duplicated components. Useful for cases where duplicate components of vectors are not permitted and exact order must be preserved.
+
+## 1. `coords2spi` function
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+#> for coords2spi, show advantage over "over" because of no need for projection, use some examples from old set
+#> for spNearest, advantage is that algorithm searches for nearest polygon, but must be used with unprojected coordinates, use examples from set and explain intelligent mechanisms
+#> for vectorEnum, give complexly distributed vector which needs to be made unique and needs to account for its uniqueness while preserving order
