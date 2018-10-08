@@ -18,7 +18,13 @@ Simply open up a local R console and execute the following:
 
 Voila, the package is yours! Feel free to test and develop it.
 
-To review our vignettes and help pages for our functions, simply execute the following:
+To review a comprehensive vignette for this package, execute the following:
+
+```r
+> vignette("demystas")
+```
+
+To review help pages for our functions, execute the following:
 
 ```r
 > ??demystas
@@ -32,7 +38,7 @@ In case the package is no longer needed, simply uninstall it by running this cod
 
 ## Contribution
 
-In order to contribute to the development of this package on GitHub, we would recommend reviewing some guidelines here: [CONTRIB.md](https://github.com/AtreyaSh/demystas/blob/master/vignettes/CONTRIB.md)
+In order to contribute to the development of this package on GitHub, we would recommend reviewing some guidelines here: [CONTRIB.md](/vignettes/CONTRIB.md)
 
 ## Author
 
