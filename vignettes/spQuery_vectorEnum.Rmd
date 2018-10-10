@@ -29,7 +29,7 @@ Other than greps-type functions, `demystas` provides other interesting and usefu
 
 1. `coords2spi`: a lightly modified wrapper function for `sp::over` which overlays coordinates of class data frame, SpatialPoints or SpatialPointsDataFrame onto a global polygon of class SpatialPolygonsDataFrame.
 
-2. `spNearest`: a larlgey modified wrapper function for `geosphere::dist2Line` which is used to complement the `coords2spi` function by finding the nearest polygon to points that do not lie directly on a polygon. This function should be used on unprojected coordinates ie. lon/lat, ideally with the WGS84 ellipsoid.
+2. `spNearest`: a largely modified wrapper function for `geosphere::dist2Line` which is used to complement the `coords2spi` function by finding the nearest polygon to points that do not lie directly on a polygon. This function should be used on unprojected coordinates ie. lon/lat, ideally with the WGS84 ellipsoid.
 
 3. `vectorEnum`: uniquely enumerates a vector's components regardless of the order or distribution of duplicated components. Useful for cases where duplicate components of vectors are not permitted and exact order must be preserved.
 
@@ -37,9 +37,42 @@ Other than greps-type functions, `demystas` provides other interesting and usefu
 
 This function is a wrapper function for `sp::over`, which essentially overlays points of classes data frame, SpatialPoints or SpatialPointsDataFrame onto a global polygon of class SpatialPolygonsDataFrame.
 
-The benefits of `coords2spi` over `sp::over` is that one can simply input coordinates as a data frame and the `coords2spi` algorithm will automatically project the data frame coordinates onto the same CRS as the global polygon. This is useful for quick checking when the user is aware that the global polygon and points of interest share the same CRS/projection.
+Assume we are trying to map the following longitude/latitude coordinates onto a global map to find out which countries they belong to. 14 coordinates are attached to a variable `coords`.
 
-<!-- 
+```{r, echo=TRUE, eval=TRUE}
+coords <- read.csv(system.file("extdata", "sample5.csv", package = "demystas"), stringsAsFactors = FALSE)
+```
+```{r, echo=FALSE, results='asis'}
+knitr::kable(coords, row.names = TRUE)
+```
+
+We would like to overlay these points onto the `global` polygon. Here is how we could perform this action. Since `coords` is not projected, the `coords2spi` function will assume that `coords` and `global` share the same CRS/Projection.
+
+```{r, echo=TRUE, eval=FALSE}
+library(rworldmap)
+library(rworldxtra)
+global <- getMap(resolution="high")
+
+results <- demystas::coords2spi(coords, global)
+```
+
+Now, let's view the countries to which the points belong to.
+
+```{r, echo=TRUE, eval=FALSE}
+results$ADMIN
+```
+```{r, echo=FALSE, eval=TRUE}
+knitr::kable(c(rep("Canada", 2), "United States of America", rep("Canada", 2), rep("Mexico", 2), "Guatemala", "El Salvador", "Canada", rep(NA,4)), row.names = TRUE)
+```
+
+Here, we can see that 10 out of 14 coordinates in `coords` have been mapped onto a country. The remaining 4 points lay outside the global polygon and cannot be mapped. We will discuss the issue of these remaining 4 points in the next section. But first, a key point to ponder below.
+
+### What is the advantage of demystas::coords2spi over sp::over?
+
+Simply put, the only valid input data for the points in `sp::over` are SpatialPoints or SpatialPointsDataFrame. For the `coords2spi` wrappper function, the user has an increased convenience of inputting a data frame of coordinates which are assumed to be of the same CRS/Projection as the global SpatialPolygonsDataFrame object provided. The function will automatically assign the global object's CRS to the coordinates and will then conduct the `sp::over` algorithm. This could save time in manually assigning a CRS/Projection to points in a data frame.
+
+<!--
+-import shapefile and some good and bad coordinates, process them and use the NAs in the next step with a visualization to show they are slighly off global polygon
 -for coords2spi, show advantage over "over" because of no need for projection, use some examples from old set
 -for spNearest, advantage is that algorithm searches for nearest polygon, but must be used with unprojected coordinates, use examples from set and explain intelligent mechanisms
 -for vectorEnum, give complexly distributed vector which needs to be made unique and needs to account for its uniqueness while preserving order 

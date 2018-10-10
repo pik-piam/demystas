@@ -21,7 +21,7 @@
 #' \dontrun{
 #'
 #' require(rworldmap)
-#' test <- coords2spi(as.data.frame(cbind(60,50)), getMap(resolution="low"))
+#' test <- demystas::coords2spi(as.data.frame(cbind(60,50)), getMap(resolution="low"))
 #' }
 
 coords2spi <- function(points, global){

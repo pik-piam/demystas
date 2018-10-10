@@ -2,7 +2,7 @@
 title: "greps-type functions (demystas)"
 author: "Atreya Shankar"
 date: "`r Sys.Date()`"
-output: rmarkdown::html_vignette  
+output: rmarkdown::html_vignette
 vignette: >
   %\VignetteIndexEntry{greps-type functions (demystas)}
   %\VignetteEngine{knitr::rmarkdown}
@@ -18,7 +18,7 @@ vignette: >
     }
 </style>
 
-```{r set-options, include = FALSE, cache=FALSE}
+```{r setup, include = FALSE}
 knitr::opts_chunk$set(
   collapse = TRUE,
   comment = "#>"
@@ -40,10 +40,10 @@ Assume we have two vectors containing strings, here `x` and `y`.These vectors ar
 ```{r, echo=TRUE, eval=TRUE}
 x <- read.csv(system.file("extdata", "sample1.csv", package = "demystas"), stringsAsFactors = FALSE)[337:347,1]
 
-y <- read.csv(system.file("extdata", "sample2.csv", package = "demystas"), stringsAsFactors = FALSE)[29:35,1]
+y <- read.csv(system.file("extdata", "sample2.csv", package = "demystas"), stringsAsFactors = FALSE)[c(29:35,553,737),1]
 ```
 
-`x` shows an excerpt of input REMIND data from the European Energy datasheets. `y` represents an excerpt of REMIND model output. Our goal is to create some mappings from `x` to `y` in order to compare parameters and conduct validations. 
+`x` shows an excerpt of a model's input data (e.g. REMIND). `y` represents an excerpt of REMIND model output. Our goal is to create some mappings from `x` to `y` in order to compare parameters and conduct validations. 
 
 Here is what `x` and `y` look like:
 
@@ -61,7 +61,7 @@ Here, we can see keywords in `x` are separated by the character `"."` and keywor
 test <- demystas::greps(x, y, sepx = "\\.", sepy = "\\|")
 ```
 
-The functions produces a list with 2 matrices. The first matrix contains mappings from `x` to `y` and the second contains the respective matching scores. Take a look:
+The functions produces a list with 2 matrices. The first matrix contains mappings from `x` to `y` and the second contains the respective matching scores in descending order for easy reading. Take a look:
 
 ```{r, echo=FALSE, results='hide'}
 test <- demystas::greps(x, y, sepx = "\\.", sepy = "\\|")
@@ -83,24 +83,26 @@ With these results, a human could then begin parsing the data row-by-row in orde
 
 ### Advanced functionality
 
-The `greps` functions contains some parameters to tweak the matching process based on the user's perspective. Some of the key parameters are:
+The `greps` functions contains some parameters to tweak the matching process based on the user's perspective. The key parameters are:
 
-1. `limitWord`: a numerical threshold greater than or equal to 0 for entire keyword matching
-2. `limitChar`: a numerical threshold between 0 and 1 for string subset-based matching
-3. `booster`: a numerical threshold which boosts the score of well-matched sub-strings
-4. `wordIgnore`: a character vector of strings which should be ignored for the matching process
+a. `limitWord`: a numerical threshold greater than or equal to 0 for entire keyword matching
+b. `limitChar`: a numerical threshold between 0 and 1 for string subset-based matching
+c. `wordIgnore`: a character vector of strings which should be ignored for the matching process
+d. `booster`: a numerical threshold which boosts the score of well-matched sub-strings. This value should be greater than `limitChar` to provide meaningful results.
+e. `checkBoth`: a logical indicating whether both left and right grep-analyses should be conducted 
+f. `ignore.case`: a logical indicating if the R internal grep function should match strings by ignoring cases
 
-We will briefly go through `limitWord` and `limitChar`.
+For brevity, we will go through `limitWord`, `wordIgnore` and `limitChar`.
 
 #### a. `limitWord`
 
-As per the previous example, if we want to filter keywords which have a matching score greater than `0.15`, we can execute the following:
+As per the previous example, if we want to filter keywords which have a matching score greater than `0.17`, we can execute the following:
 
 ```{r, echo=TRUE, eval = FALSE}
-test <- demystas::greps(x, y, sepx = "\\.", sepy = "\\|", limitWord = 0.15)
+test <- demystas::greps(x, y, sepx = "\\.", sepy = "\\|", limitWord = 0.17)
 ```
 ```{r, echo=FALSE, results='hide'}
-test <- demystas::greps(x, y, sepx = "\\.", sepy = "\\|", limitWord = 0.15)
+test <- demystas::greps(x, y, sepx = "\\.", sepy = "\\|", limitWord = 0.17)
 ```
 ```{r, echo=TRUE, eval = FALSE, results='markup'}
 View(test[[1]])
@@ -108,18 +110,26 @@ View(test[[1]])
 ```{r, echo=FALSE, results='asis'}
 knitr::kable(test[[1]])
 ```
+```{r, echo=TRUE, eval = FALSE, results='markup'}
+View(test[[2]])
+```
+```{r, echo=FALSE, results='asis'}
+knitr::kable(test[[2]])
+```
 
-Here, we see a smaller matrix of matchings with matching scores below or equal to 0.15 removed. This might be useful for filtering purposes.
+Here, we see a smaller matrix of matchings with matching scores above 0.17. This might be useful for filtering purposes.
 
 #### b. `limitChar`
 
-We can also notice that the bulk of the matchings occur because `Xport` in `x` is a case-insensitive subset of `Exports` in `y`. If we increase the value of `limitChar` to a large value like `0.9`, then `Xport` will no longer match to `Exports` since it does match more than 90% of its own characters.
+As per the result above, we notice that "Xport.seel.waste" matches to "Emi|SO2|Land Use|Agricultural Waste Burning" due to the substring "waste" matching the substring "Agricultural Waste Burning" respectively. In our perspective, this would be considered a redundant match and we would want to remove such cases. To do this, we can set the threshold for string-subset matchings to be higher. This corresponds to the `limitChar` parameter.
+
+In this case, we can increase `limitChar` from its default value of 0 to 0.5.
 
 ```{r, echo=TRUE, eval = FALSE}
-test <- demystas::greps(x, y, sepx = "\\.", sepy = "\\|", limitWord = 0.15, limitChar = 0.9)
+test <- demystas::greps(x, y, sepx = "\\.", sepy = "\\|", limitWord = 0.17, limitChar = 0.5)
 ```
 ```{r, echo=FALSE, results='hide'}
-test <- demystas::greps(x, y, sepx = "\\.", sepy = "\\|", limitWord = 0.15, limitChar = 0.9)
+test <- demystas::greps(x, y, sepx = "\\.", sepy = "\\|", limitWord = 0.17, limitChar = 0.5)
 ```
 ```{r, echo=TRUE, eval = FALSE, results='markup'}
 View(test[[1]])
@@ -127,10 +137,41 @@ View(test[[1]])
 ```{r, echo=FALSE, results='asis'}
 knitr::kable(test[[1]])
 ```
+```{r, echo=TRUE, eval = FALSE, results='markup'}
+View(test[[2]])
+```
+```{r, echo=FALSE, results='asis'}
+knitr::kable(test[[2]])
+```
 
-Here, we can see that there are no matchings altogether. This is because of our `limitChar` parameter being set too high. We can naturally reduce this parameter until we achieve more appropriate matchings.
+Consequently, we observe that the redundant "Emi|SO2|Land Use|Agricultural Waste Burning" match disappears.
 
-The key idea of this parameter is to be able to omit non-meaningful matchings such as eg. `pe` being matched to `shape`; but allowing meaningful matchings of eg. `Xport` to `Exports`.
+Note: The user should be conservative with the `limitChar` and `limitWord` values, as high values can also result in no matchings at all!
+
+#### c. `wordIgnore`
+
+We can notice here that the top match for components such as "Xport.other" and "Xport.seso.other" is "Energy Investments|Other". This is due to a perfect match of the string "other" on both sides. This would not be necessarily desirable from the human's perspective, since the string "other" is ambiguous. If we want to stop the algorithm from successfully matching the string "other", we can input this into the `wordIgnore` parameter.
+
+```{r, echo=TRUE, eval = FALSE}
+test <- demystas::greps(x, y, sepx = "\\.", sepy = "\\|", limitWord = 0.15, limitChar = 0.5, wordIgnore = c("other"))
+```
+```{r, echo=FALSE, results='hide'}
+test <- demystas::greps(x, y, sepx = "\\.", sepy = "\\|", limitWord = 0.15, limitChar = 0.5, wordIgnore = c("other"))
+```
+```{r, echo=TRUE, eval = FALSE, results='markup'}
+View(test[[1]])
+```
+```{r, echo=FALSE, results='asis'}
+knitr::kable(test[[1]])
+```
+```{r, echo=TRUE, eval = FALSE, results='markup'}
+View(test[[2]])
+```
+```{r, echo=FALSE, results='asis'}
+knitr::kable(test[[2]])
+```
+
+With this, we can observe that the matched string "Energy Investments|Other" disappears because its substring "other" is now being ignored, which leads to no successful matching. The resulting matrix produces matchings which are probably more relevant to the human.
 
 ## 2. `grepsParallel` function
 
@@ -149,9 +190,9 @@ y <- read.csv(system.file("extdata", "sample2.csv", package = "demystas"), strin
 To match the keywords through our `greps` functions, we need to process 100 x 300 x 2 = 60,000 cases. Here we compare the sequential `greps` functions in `test1` against the parallel `grepsParallel` function in `test2`.
 
 ```{r, echo=TRUE, eval=FALSE}
-test1 <- demystas::greps(x, y, sepx = "\\.", sepy = "\\|", limitWord = 0.1, limitChar = 0.5)
+test1 <- demystas::greps(x, y, sepx = "\\.", sepy = "\\|")
 
-test2 <- demystas::grepsParallel(x, y, noCores = 4, sepx = "\\.", sepy = "\\|", limitWord = 0.1, limitChar = 0.5)
+test2 <- demystas::grepsParallel(x, y, noCores = 4, sepx = "\\.", sepy = "\\|")
 ```
 ```{r, echo=FALSE, results='asis'}
 new <- data.frame(matrix(ncol = 3, nrow = 0))
@@ -178,7 +219,7 @@ This can also be visualized by the speed ratio (black) of the parallel algorithm
 knitr::include_graphics('./seqVparSpeed.png')
 ```
 
-### 3. `grepsAbb` function
+## 3. `grepsAbb` function
 
 The `grepsAbb` function essentially maps abbreviations to whole words using a logical mapping alogrithm. A useful example could be mapping non-ISO3 country abbreviations to country names. For these cases, there is no standard to map abbreviations to words, and therefore we could use the `grepsAbb` algorithm.
 

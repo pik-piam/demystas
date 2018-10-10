@@ -49,7 +49,7 @@ from best to worst. The user is able to influence the algorithm by tweaking matc
 
 x <- c("foo.test.xyz", "baz.foosh", "bat")
 y <- c("ba","foosba.asd", "bats.at", "foos", "gams.asd")
-test <- grepsParallel(x, y, 2)
+test <- demystas::grepsParallel(x, y, 2)
 }
 }
 \author{

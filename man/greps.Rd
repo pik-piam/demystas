@@ -47,7 +47,7 @@ from best to worst. The user is able to influence the algorithm by tweaking matc
 
 x <- c("foo.test.xyz", "baz.foosh", "bat")
 y <- c("ba","foosba.asd", "bats.at", "foos", "gams.asd")
-test <- greps(x, y)
+test <- demystas::greps(x, y)
 }
 }
 \author{

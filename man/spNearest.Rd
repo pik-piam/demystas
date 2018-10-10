@@ -27,7 +27,7 @@ Should be used with unprojected coordinates íe. lon/lat, ideally on the WGS84 e
 require(rworldmap)
 require(rworldxtra)
 points <- rbind(c(-81.779,52.234), c(-80.873, 51.126))
-test <- spNearest(points, getMap(resolution="high"))
+test <- demystas::spNearest(points, getMap(resolution="high"))
 }
 }
 \seealso{

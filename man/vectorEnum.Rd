@@ -21,7 +21,7 @@ Enumarates components of a vector in order to make each component unique. Useful
 \dontrun{
 
 x <- c(rep("foo", 10), rep("bat", 25), rep("baz", 10), rep("foo", 10))
-test <- vectorEnum(x)
+test <- demystas::vectorEnum(x)
 }
 }
 \author{

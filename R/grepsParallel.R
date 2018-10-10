@@ -38,7 +38,7 @@
 #'
 #' x <- c("foo.test.xyz", "baz.foosh", "bat")
 #' y <- c("ba","foosba.asd", "bats.at", "foos", "gams.asd")
-#' test <- grepsParallel(x, y, 2)
+#' test <- demystas::grepsParallel(x, y, 2)
 #' }
 
 grepsParallel <- function(x, y, noCores, sepx = "\\.", sepy = "\\.", limitChar = 0, limitWord = 0, booster = 0.9, wordIgnore = NULL, checkBoth = TRUE, ignore.case = TRUE){
@@ -85,6 +85,8 @@ grepsParallel <- function(x, y, noCores, sepx = "\\.", sepy = "\\.", limitChar =
 
   if(!is.numeric(booster)){
     stop("booster must be numerical")
+  } else if(booster <= limitChar){
+    warning("booster is lower than or equal to limitChar, this will make the booster parameter redundant")
   }
 
   if(!is.null(wordIgnore) & !is.character(wordIgnore)){

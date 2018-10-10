@@ -16,7 +16,7 @@
 #'
 #' x <- c("BLG", "BLD", "LAT", "EMM")
 #' y <- c("Boulder","Latino", "Eminem", "Emmys", "Building")
-#' test <- grepsAbb(x, y)
+#' test <- demystas::grepsAbb(x, y)
 #' }
 
 grepsAbb <- function(x, y){
