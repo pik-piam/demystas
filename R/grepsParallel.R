@@ -15,7 +15,7 @@
 #' say, 0.7. Defaults to 0.
 #' @param limitWord a numerical value greater than or equal to 0 which provides a proportional filter for significant overall characters matched. Defaults to 0.
 #' @param booster a numerical value between 0 to 1 which provides a boost to the matching score of exceptionally well-matched words. For meaningful results, its value should be greater than `limitWord`.
-#' Defaults to 0.9.
+#' Defaults to 0.8.
 #' @param wordIgnore a character vector which should be ignored while searching for matches. Examples could be redundant characters such as "the" or "of". Defaults to NULL.
 #' @param checkBoth a logical which indicates whether both left and right grep analyses should be conducted (TRUE), or if only a left grep analysis is necessary (FALSE). Defaults to TRUE.
 #' @param ignore.case a logical which indicates if cases should be ignored when matching. Defaults to TRUE.
@@ -41,7 +41,7 @@
 #' test <- demystas::grepsParallel(x, y, 2)
 #' }
 
-grepsParallel <- function(x, y, noCores, sepx = "\\.", sepy = "\\.", limitChar = 0, limitWord = 0, booster = 0.9, wordIgnore = NULL, checkBoth = TRUE, ignore.case = TRUE){
+grepsParallel <- function(x, y, noCores, sepx = "\\.", sepy = "\\.", limitChar = 0, limitWord = 0, booster = 0.8, wordIgnore = NULL, checkBoth = TRUE, ignore.case = TRUE){
 
   ### check dependencies ###
 

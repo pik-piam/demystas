@@ -5,7 +5,7 @@
 \title{Parallel pairwise grep-style matching}
 \usage{
 grepsParallel(x, y, noCores, sepx = "\\\\.", sepy = "\\\\.",
-  limitChar = 0, limitWord = 0, booster = 0.9, wordIgnore = NULL,
+  limitChar = 0, limitWord = 0, booster = 0.8, wordIgnore = NULL,
   checkBoth = TRUE, ignore.case = TRUE)
 }
 \arguments{
@@ -26,7 +26,7 @@ say, 0.7. Defaults to 0.}
 \item{limitWord}{a numerical value greater than or equal to 0 which provides a proportional filter for significant overall characters matched. Defaults to 0.}
 
 \item{booster}{a numerical value between 0 to 1 which provides a boost to the matching score of exceptionally well-matched words. For meaningful results, its value should be greater than `limitWord`.
-Defaults to 0.9.}
+Defaults to 0.8.}
 
 \item{wordIgnore}{a character vector which should be ignored while searching for matches. Examples could be redundant characters such as "the" or "of". Defaults to NULL.}
 

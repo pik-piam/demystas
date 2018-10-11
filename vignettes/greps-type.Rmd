@@ -146,11 +146,11 @@ knitr::kable(test[[2]])
 
 Consequently, we observe that the redundant "Emi|SO2|Land Use|Agricultural Waste Burning" match disappears.
 
-Note: The user should be conservative with the `limitChar` and `limitWord` values, as high values can also result in no matchings at all!
+**Note: The user should be conservative with the `limitChar` and `limitWord` values, as high values can also result in no matchings at all!**
 
 #### c. `wordIgnore`
 
-We can notice here that the top match for components such as "Xport.other" and "Xport.seso.other" is "Energy Investments|Other". This is due to a perfect match of the string "other" on both sides. This would not be necessarily desirable from the human's perspective, since the string "other" is ambiguous. If we want to stop the algorithm from successfully matching the string "other", we can input this into the `wordIgnore` parameter.
+We can notice here that the top match for components such as "Xport.other" and "Xport.seso.other" is "Energy Investments|Other". This is due to a perfect match of the string "other" on both sides. This would not be necessarily desirable from the human's perspective, since the substring "other" is ambiguous. If we want to stop the algorithm from successfully matching the string "other", we can input this into the `wordIgnore` parameter.
 
 ```{r, echo=TRUE, eval = FALSE}
 test <- demystas::greps(x, y, sepx = "\\.", sepy = "\\|", limitWord = 0.15, limitChar = 0.5, wordIgnore = c("other"))
