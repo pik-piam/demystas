@@ -34,6 +34,8 @@ $ git clone https://github.com/pik-piam/demystas && cd demystas
 
 Voila, the package is yours! Feel free to test and develop it.
 
+## Miscellaneous
+
 To review a comprehensive vignette for this package, execute the following:
 
 ```r
