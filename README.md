@@ -6,7 +6,7 @@ As data analysts, there are a myriad of daily tasks which seem simple, but yet h
 
 This package aims to offer useful functions for data analysts which might help in making these "on-the-fly" tasks lighter and more automated.
 
-## Installation
+## Installation via GitHub
 
 Simply open up a local R console and execute the following:
 
@@ -14,6 +14,22 @@ Simply open up a local R console and execute the following:
 > if(!require(devtools)) install.packages("devtools")
 
 > devtools::install_github("AtreyaSh/demystas", build_vignettes = TRUE)
+```
+
+## Installation via Source
+
+1. Clone this repository onto your personal workspace and navigate into its main directory
+
+```shell
+$ git clone https://github.com/pik-piam/demystas && cd demystas
+```
+
+2. Open up a local R console using `RStudio` in this directory. Execute the following:
+
+```r
+> if(!require(devtools)) install.packages("devtools")
+
+> devtools::install(build_vignettes = TRUE)
 ```
 
 Voila, the package is yours! Feel free to test and develop it.
