@@ -8,12 +8,12 @@ This package aims to offer useful functions for data analysts which might help i
 
 ## Installation via GitHub
 
-Simply open up a local R console and execute the following:
+Simply open up a local R console using `RStudio` and execute the following:
 
 ```r
 > if(!require(devtools)) install.packages("devtools")
 
-> devtools::install_github("AtreyaSh/demystas", build_vignettes = TRUE)
+> devtools::install_github("pik-piam/demystas", build_vignettes = TRUE)
 ```
 
 ## Installation via Source
