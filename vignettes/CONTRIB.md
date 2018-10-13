@@ -40,7 +40,7 @@ $ git branch dev
 $ git checkout dev
 ```
 
-Now, you can start to commit changes to your `dev` branch.
+Now, you can start to make changes to your `dev` branch.
 
 ## B. Submitting pull request
 
@@ -64,7 +64,12 @@ $ git checkout dev
 $ git rebase master
 ```
 
-3. Go to the forked repository on your GitHub page. Navigate to the `dev` branch and click the pull request button. Describe the contents/crux of your pull request. Once all is well, submit the pull request.
+3. Push your local commits to your forked repository's `dev` branch.
 
-4. The proposed changes will be reviewed and we will revert regarding the merging process.
+```shell
+$ git push -u origin dev
+```
 
+4. Go to the forked repository on your GitHub page. Navigate to the `dev` branch and click the pull request button. Describe the contents/crux of your pull request. Once all is well, submit the pull request.
+
+5. The proposed changes will be reviewed and we will revert regarding the merging process.
