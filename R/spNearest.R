@@ -5,9 +5,9 @@
 #'
 #' @name spNearest
 #' @concept demystas
-#' @param points a data frame with two columns of coordinates, or an object of class SpatialPoints or SpatialPointsDataFrame.
-#' Coordinates in `points` should be in the same column order as those in `global`
-#' @param global an object of class SpatialPolygonsDataFrame onto which `points` is mapped.
+#' @param points a data frame with two columns of coordinates (first longitude, then latitude), or a SpatialPoints* object.
+#' @param global a data frame with two columns of coordinates (first longitude, then latitude), or a SpatialLines* object
+#' or a SpatialPolygons* object. This represents the object onto which `points` is mapped.
 #' @param inc a numerical value which indicates how much the entire bounding box of `global` shoud be segmented to find nearest countries. Defaults to 100.
 #' @return a data frame with attributes from `global` about nearest polygon (country) to `points`
 #' @author Atreya Shankar
@@ -39,12 +39,12 @@ spNearest <- function(points, global, inc = 100){
 
   if(is.matrix(points)){
     points <- as.data.frame(points)
-  } else if(!is.data.frame(points) & class(points) != "SpatialPoints" & class(points) != "SpatialPointsDataFrame"){
-    stop("points must be either of class data frame, SpatialPoints or SpatialPointsDataFrame")
+  } else if(!is.data.frame(points) & length(grep("SpatialPoints", class(points))) == 0){
+    stop("points must be a data frame or a SpatialPoints* object")
   }
 
-  if(class(global) != "SpatialPolygonsDataFrame"){
-    stop("global must have the class of SpatialPolygonsDataFrame")
+  if(length(grep("SpatialPolygons", class(global))) == 0 & length(grep("SpatialLines", class(global))) == 0){
+    stop("global must be a SpatialLines* or SpatialPolygons* object")
   }
 
   if(!is.data.frame(points)){

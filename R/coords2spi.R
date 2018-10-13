@@ -1,13 +1,13 @@
 #' Convert coordinates to spatial information
 #'
-#' Overlays coordinates of class data frame, SpatialPoints or SpatialPointsDataFrame onto polygon(s) of class SpatialPolygonsDataFrame in order to retrieve relevant intersecting
-#' spatial information. Utilizes the `sp::over` function at the backend.
+#' Wrapper function for `sp::over` in overlaying points over polygons to retrieve relevant intersection information.
 #'
 #' @name coords2spi
 #' @concept demystas
-#' @param points a data frame with two columns of coordinates, or an object of class SpatialPoints or SpatialPointsDataFrame.
+#' @param points a data frame with two columns of coordinates, or a Spatial object listed here under "x" in showMethods(sp::over).
 #' These represent points to be mapped onto polygon(s). Coordinates in `points` should be in the same column order as those in `global`
-#' @param global an object of class SpatialPolygonsDataFrame onto which `points` is mapped.
+#' @param global an object onto which `points` is mapped, possible classes corresponding to `points` listed under "y" in
+#' showMethods(sp::over). If `points` is a data frame, it will be converted into a SpatialPoints object.
 #' @return a data frame corresponding to the coordinates in `points` mapped onto `global` with the attributes of `global`
 #' @author Atreya Shankar
 #' @importFrom sp spTransform
@@ -26,12 +26,8 @@
 
 coords2spi <- function(points, global){
 
-  if(!is.data.frame(points) & class(points) != "SpatialPoints" & class(points) != "SpatialPointsDataFrame"){
-    stop("points must be either of class data frame, SpatialPoints or SpatialPointsDataFrame")
-  }
-
-  if(class(global) != "SpatialPolygonsDataFrame"){
-    stop("global must have the class of SpatialPolygonsDataFrame")
+  if(is.matrix(points)){
+    points <- as.data.frame(points)
   }
 
   if(is.data.frame(points)){

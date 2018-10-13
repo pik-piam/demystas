@@ -7,17 +7,17 @@
 coords2spi(points, global)
 }
 \arguments{
-\item{points}{a data frame with two columns of coordinates, or an object of class SpatialPoints or SpatialPointsDataFrame.
+\item{points}{a data frame with two columns of coordinates, or a Spatial object listed here under "x" in showMethods(sp::over).
 These represent points to be mapped onto polygon(s). Coordinates in `points` should be in the same column order as those in `global`}
 
-\item{global}{an object of class SpatialPolygonsDataFrame onto which `points` is mapped.}
+\item{global}{an object onto which `points` is mapped, possible classes corresponding to `points` listed under "y" in
+showMethods(sp::over). If `points` is a data frame, it will be converted into a SpatialPoints object.}
 }
 \value{
 a data frame corresponding to the coordinates in `points` mapped onto `global` with the attributes of `global`
 }
 \description{
-Overlays coordinates of class data frame, SpatialPoints or SpatialPointsDataFrame onto polygon(s) of class SpatialPolygonsDataFrame in order to retrieve relevant intersecting
-spatial information. Utilizes the `sp::over` function at the backend.
+Wrapper function for `sp::over` in overlaying points over polygons to retrieve relevant intersection information.
 }
 \examples{
 \dontrun{

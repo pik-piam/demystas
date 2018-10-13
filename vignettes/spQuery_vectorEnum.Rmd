@@ -27,15 +27,13 @@ knitr::opts_chunk$set(
 
 Other than greps-type functions, `demystas` provides other interesting and useful functions which fall under the categories of spatial querying and vector enumeration. Following are the key functions:
 
-1. `coords2spi`: a lightly modified wrapper function for `sp::over` which overlays coordinates of class data frame, SpatialPoints or SpatialPointsDataFrame onto a global polygon of class SpatialPolygonsDataFrame.
+1. `coords2spi`: a lightly modified wrapper function for `sp::over` which overlays coordinates of class data frame or specified Spatial objects onto a global polygon of specified Spatial objects. 
 
 2. `spNearest`: a largely modified wrapper function for `geosphere::dist2Line` which is used to complement the `coords2spi` function by finding the nearest polygon to points that do not lie directly on a polygon. This function should be used on unprojected coordinates ie. lon/lat, ideally with the WGS84 ellipsoid.
 
 3. `vectorEnum`: uniquely enumerates a vector's components regardless of the order or distribution of duplicated components. Useful for cases where duplicate components of vectors are not permitted and exact order must be preserved.
 
 ## 1. `coords2spi` function
-
-This function is a wrapper function for `sp::over`, which essentially overlays points of classes data frame, SpatialPoints or SpatialPointsDataFrame onto a global polygon of class SpatialPolygonsDataFrame.
 
 Assume we are trying to map the following 14 longitude/latitude coordinates onto a global map to find out which countries they belong to. These points could represent possible potential hydro-powerplant locations.
 
@@ -75,7 +73,7 @@ Here, we can see that 10 out of 14 coordinates in `coords` have been mapped onto
 
 ### What is the advantage of demystas::coords2spi over sp::over?
 
-Simply put, the only valid input data for the points in `sp::over` are SpatialPoints or SpatialPointsDataFrame. For the `coords2spi` wrappper function, the user has an increased convenience of inputting a data frame of coordinates which are assumed to be of the same CRS/Projection as the global SpatialPolygonsDataFrame object provided. The function will automatically assign the global object's CRS to the coordinates and will then conduct the `sp::over` algorithm. This could save time in manually assigning a CRS/Projection to points in a data frame.
+`sp::over` has fixed input dataset-combinations which can be reviewed by running `showMethods(sp::over)`. Under `sp::over`, data frames cannot be used as an input dataset. For the `coords2spi` wrappper function, the user has an increased convenience of inputting a data frame of coordinates which are assumed to be of the same CRS/Projection as the `global` polygon. The function will automatically assign the `global` object's CRS to the coordinates and will then conduct the `sp::over` algorithm. This could save time in manually assigning a CRS/Projection to points in a data frame.
 
 ## 2. `spNearest` function
 

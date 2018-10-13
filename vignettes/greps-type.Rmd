@@ -92,7 +92,7 @@ d. `booster`: a numerical threshold which boosts the score of well-matched sub-s
 e. `checkBoth`: a logical indicating whether both left and right grep-analyses should be conducted 
 f. `ignore.case`: a logical indicating if the R internal grep function should match strings by ignoring cases
 
-For brevity, we will go through `limitWord`, `wordIgnore` and `limitChar`.
+For brevity, we will go through `limitWord`, `limitChar` and `wordIgnore`.
 
 #### a. `limitWord`
 

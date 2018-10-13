@@ -7,10 +7,10 @@
 spNearest(points, global, inc = 100)
 }
 \arguments{
-\item{points}{a data frame with two columns of coordinates, or an object of class SpatialPoints or SpatialPointsDataFrame.
-Coordinates in `points` should be in the same column order as those in `global`}
+\item{points}{a data frame with two columns of coordinates (first longitude, then latitude), or a SpatialPoints* object.}
 
-\item{global}{an object of class SpatialPolygonsDataFrame onto which `points` is mapped.}
+\item{global}{a data frame with two columns of coordinates (first longitude, then latitude), or a SpatialLines* object
+or a SpatialPolygons* object. This represents the object onto which `points` is mapped.}
 
 \item{inc}{a numerical value which indicates how much the entire bounding box of `global` shoud be segmented to find nearest countries. Defaults to 100.}
 }
