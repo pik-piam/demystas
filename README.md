@@ -1,4 +1,4 @@
-# Demystifying Automation on Simple Tasks [![GitHub release](https://img.shields.io/github/release/Naereen/StrapDown.js.svg)](https://GitHub.com/pik-piam/demystas/releases/)
+# Demystifying Automation on Simple Tasks [![Generic badge](https://img.shields.io/badge/release-v1.3.6-blue.svg)](https://shields.io/)
 
 ## Background
 
