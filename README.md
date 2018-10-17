@@ -28,6 +28,16 @@ Package updates can be installed using `update.packages` (make sure that the add
 update.packages()
 ```
 
+## Installation via GitHub
+
+Alternatively, this package can be installed via GitHub. Simply open up a local R console using `RStudio` and execute the following:
+
+```r
+> if(!require(devtools)) install.packages("devtools")
+
+> devtools::install_github("pik-piam/demystas", build_vignettes = TRUE)
+```
+
 Voila, the package is yours! Feel free to test and develop it.
 
 ## Miscellaneous
