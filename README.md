@@ -6,33 +6,31 @@ As data analysts, there are a myriad of daily tasks which seem simple, but yet h
 
 This package aims to offer useful functions for data analysts which might help in making these "on-the-fly" tasks lighter and more automated.
 
-## Installation via GitHub
+## Installation via PIK-CRAN
 
-Simply open up a local R console using `RStudio` and execute the following:
-
-```r
-> if(!require(devtools)) install.packages("devtools")
-
-> devtools::install_github("pik-piam/demystas", build_vignettes = TRUE)
-```
-
-## Installation via Source
-
-1. Clone this repository onto your personal workspace and navigate into its main directory
-
-```shell
-$ git clone https://github.com/pik-piam/demystas && cd demystas
-```
-
-2. Open up a local R console using `RStudio` in this directory. Execute the following:
+For installation of the most recent package version an additional repository can be added in R:
 
 ```r
-> if(!require(devtools)) install.packages("devtools")
+options(repos = c(CRAN = "@CRAN@", rd3mod_repo = "http://www.pik-potsdam.de/rd3mod/R/"))
+```
 
-> devtools::install(build_vignettes = TRUE)
+The additional repository can be made availably permanently by adding the line above to a file called `.Rprofile` stored in the home folder of your system (`Sys.glob("~")` in R returns the home directory).
+
+After that the most recent version of the package can be installed using `install.packages`:
+
+```r
+install.packages("demystas")
+```
+
+Package updates can be installed using `update.packages` (make sure that the additional repository has been added before running that command):
+
+```r
+update.packages()
 ```
 
 Voila, the package is yours! Feel free to test and develop it.
+
+## Miscellaneous
 
 To review a comprehensive vignette for this package, execute the following:
 
