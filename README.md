@@ -1,4 +1,4 @@
-# Demystifying Automation on Simple Tasks [![Generic badge](https://img.shields.io/badge/release-v1.3.6-blue.svg)](https://shields.io/)
+# Demystifying Automation on Simple Tasks [![Generic badge](https://img.shields.io/badge/release-v1.3.6-blue.svg)](https://github.com/pik-piam/demystas/releases/)
 
 ## Background
 
@@ -6,9 +6,19 @@ As data analysts, there are a myriad of daily tasks which seem simple, but yet h
 
 This package aims to offer useful functions for data analysts which might help in making these "on-the-fly" tasks lighter and more automated.
 
+## Installation via GitHub
+
+To install via GitHub, simply open up a local R console using `RStudio` and execute the following:
+
+```r
+> if(!require(devtools)) install.packages("devtools")
+
+> devtools::install_github("pik-piam/demystas", build_vignettes = TRUE)
+```
+
 ## Installation via PIK-CRAN
 
-For installation of the most recent package version an additional repository can be added in R:
+For installation via PIK-CRAN, an additional repository must be added in R:
 
 ```r
 > options(repos = c(CRAN = "@CRAN@", rd3mod_repo = "http://www.pik-potsdam.de/rd3mod/R/"))
@@ -28,16 +38,6 @@ Package updates can be installed using `update.packages` (make sure that the add
 > update.packages()
 ```
 
-## Installation via GitHub
-
-Alternatively, this package can be installed via GitHub. Simply open up a local R console using `RStudio` and execute the following:
-
-```r
-> if(!require(devtools)) install.packages("devtools")
-
-> devtools::install_github("pik-piam/demystas", build_vignettes = TRUE)
-```
-
 Voila, the package is yours! Feel free to test and develop it.
 
 ## Miscellaneous
@@ -47,6 +47,8 @@ To review a comprehensive vignette for this package, execute the following:
 ```r
 > vignette("demystas")
 ```
+
+**Note: For optimal building and viewing of vignettes, we recommend an installation via GitHub** 
 
 To review help pages for our functions, execute the following:
 
