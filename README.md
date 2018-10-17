@@ -16,6 +16,8 @@ To install via GitHub, simply open up a local R console using `RStudio` and exec
 > devtools::install_github("pik-piam/demystas", build_vignettes = TRUE)
 ```
 
+**Note: For optimal building and viewing of vignettes, we recommend an installation via GitHub** 
+
 ## Installation via PIK-CRAN
 
 For installation via PIK-CRAN, an additional repository must be added in R:
@@ -47,8 +49,6 @@ To review a comprehensive vignette for this package, execute the following:
 ```r
 > vignette("demystas")
 ```
-
-**Note: For optimal building and viewing of vignettes, we recommend an installation via GitHub** 
 
 To review help pages for our functions, execute the following:
 
