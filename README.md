@@ -8,12 +8,17 @@ This package aims to offer useful functions for data analysts which might help i
 
 ## Installation via GitHub
 
-To install via GitHub, simply open up a local R console using `RStudio` and execute the following:
+To install via GitHub, clone this repository and navigate to its main directory:
+
+```shell
+$ git clone https://github.com/pik-piam/demystas && cd demystas
+```
+Within the main directory, open up a local R console using `RStudio` and execute the following:
 
 ```r
 > if(!require(devtools)) install.packages("devtools")
 
-> devtools::install_github("pik-piam/demystas", build_vignettes = TRUE)
+> devtools::install(build_vignettes = TRUE)
 ```
 
 **Note: For optimal building and viewing of vignettes, we recommend an installation via GitHub** 
