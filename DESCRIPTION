@@ -21,7 +21,7 @@ Imports: doParallel,
     methods,
     parallel,
     stats
-ValidationKey: 2481011
+ValidationKey: 23382190
 Suggests: knitr,
     rmarkdown
 VignetteBuilder: knitr
