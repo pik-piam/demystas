@@ -1,4 +1,4 @@
-# Demystifying Automation on Simple Tasks [![Generic badge](https://img.shields.io/badge/release-v1.3.8-blue.svg)](https://github.com/pik-piam/demystas/releases/)
+# Demystifying Automation on Simple Tasks [![Generic badge](https://img.shields.io/badge/release-v1.3.9-blue.svg)](https://github.com/pik-piam/demystas/releases/)
 
 ## Background
 
