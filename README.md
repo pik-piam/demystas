@@ -1,4 +1,4 @@
-# Demystifying Automation on Simple Tasks [![Generic badge](https://img.shields.io/badge/release-v1.3.7-blue.svg)](https://github.com/pik-piam/demystas/releases/)
+# Demystifying Automation on Simple Tasks [![Generic badge](https://img.shields.io/badge/release-v1.3.8-blue.svg)](https://github.com/pik-piam/demystas/releases/)
 
 ## Background
 
@@ -69,7 +69,7 @@ In case the package is no longer needed, simply uninstall it by running this cod
 
 ## Contribution
 
-In order to contribute to the development of this package on GitHub, we would recommend reviewing some guidelines here: [CONTRIB.md](/vignettes/CONTRIB.md)
+In order to contribute to the development of this package on GitHub, we would recommend reviewing some guidelines here: [CONTRIB.md](/doc/CONTRIB.md)
 
 ## Author
 
