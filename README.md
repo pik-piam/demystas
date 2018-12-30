@@ -52,7 +52,7 @@ In case the package is no longer needed, simply uninstall it by running this cod
 
 ## Contribution
 
-In order to contribute to the development of this package on GitHub, we would recommend reviewing some guidelines here: [CONTRIB.md](/vignettes/CONTRIB.md)
+In order to contribute to the development of this package on GitHub, we would recommend reviewing some guidelines here: [CONTRIBUTING.md](/vignettes/CONTRIBUTING.md)
 
 ## Author
 
