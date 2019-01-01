@@ -17,7 +17,7 @@ $ git clone https://github.com/<youraccount>/demystas
 3. Add our original repository as an additional remote URL
 
 ```shell
-$ git remote add upstream https://github.com/AtreyaSh/demystas
+$ git remote add upstream https://github.com/pik-piam/demystas
 ```
 
 4. Before committing any changes, ensure your forked repository is synced with all the updates from the original repository
